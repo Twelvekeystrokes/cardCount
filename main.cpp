@@ -56,7 +56,7 @@ int main()
                 {cout << "\n\n[RESET]\n\n"; break;}
             if (hand == "Q") return 0; /// program exit
 
-            for (int i = 0; i < hand.length(); i++) {
+            for (unsigned int i = 0; i < hand.length(); i++) {
                 char card = toupper(hand.at(i));
 
                 /// SPEED-INPUT
@@ -80,7 +80,7 @@ int main()
             cards_in_deck * (running_count + 3 * (aces - cards_left / 13))
             / cards_left / 2;
 
-            if (wager_count < 1) {printf("Bet minimum.", wager);}
+            if (wager_count < 1) {cout << "Bet minimum.";}
             else {
                 cout << "Bet " << int(wager_count * wager) << ".";
                 if ((int(wager_count*wager*1.15/2))>=wager)
