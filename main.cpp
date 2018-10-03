@@ -72,7 +72,12 @@ int main()
 
             /// True Count is rounded down to 2 decimals
             /// determined by dividing running count by half-decks
-            printf("True Count: %.2f | Decks Left: %.2f\n", true_count, (cards_left / cards_in_deck));
+            printf("True Count: %.2f | Decks Left: %.2f", true_count, (cards_left / cards_in_deck));
+
+            printf(" | Excess Aces: %.1f | INSURANCE: ", aces - cards_left / 13);
+            if (insurance_count > 4 * cards_left / cards_in_deck)
+                cout << "YES\n";
+            else cout << "NO\n";
 
             /// Wagering Count uses excess aces
 
@@ -82,17 +87,15 @@ int main()
 
             if (wager_count < 1) {cout << "Bet minimum.";}
             else {
-                cout << "Bet " << int(wager_count * wager) << ".";
-                if ((int(wager_count*wager*1.15/2))>=wager)
-                    {cout << " | (2 seats): " << int(wager_count*wager*1.15/2);
+                printf("Bet %.1f.", wager_count * wager);
+                if ((wager_count*wager*1.15/2)>=wager)
+                    {printf(" | (2 seats): %.1f", wager_count*wager*1.15/2);
                 }
-                if ((int(wager_count*wager*1.26/2))>=wager) {cout << " | (4 seats): " << int(wager_count*wager*1.26/2);}
+                if ((wager_count*wager*1.26/2)>=wager) {
+                    printf(" | (4 seats): %.1f", wager_count*wager*1.26/2);}
             }
 
-            cout << " | Excess Aces: " << setprecision(2) << (aces - cards_left / 13) << " | INSURANCE: ";
-            if (insurance_count > 4 * cards_left / cards_in_deck)
-                cout << "YES";
-            else cout << "NO";
+
         }
     }
 }
