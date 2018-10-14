@@ -85,14 +85,16 @@ int main()
             cards_in_deck * (running_count + 3 * (aces - cards_left / 13))
             / cards_left / 2;
 
-            if (wager_count < 1) {cout << "Bet minimum.";}
+            double conservative = 0.5;
+
+            if (wager_count < 1 + conservative) {cout << "Bet minimum.";}
             else {
-                printf("Bet %.1f.", wager_count * wager);
-                if ((wager_count*wager*1.15/2)>=wager)
-                    {printf(" | (2 seats): %.1f", wager_count*wager*1.15/2);
+                printf("Bet %.1f.", (wager_count - conservative) * wager);
+                if ((wager_count*wager*1.15/2)>=wager + conservative)
+                    {printf(" | (2 seats): %.1f", (wager_count - conservative)*wager*1.15/2);
                 }
-                if ((wager_count*wager*1.26/2)>=wager) {
-                    printf(" | (4 seats): %.1f", wager_count*wager*1.26/2);}
+                if ((wager_count*wager*1.26/2)>=wager+ conservative) {
+                    printf(" | (4 seats): %.1f", (wager_count - conservative)*wager*1.26/2);}
             }
 
 
