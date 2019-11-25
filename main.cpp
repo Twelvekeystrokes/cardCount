@@ -40,10 +40,12 @@ int main()
     double decks, wager;
     cout << "Number of Decks: ";
     cin >> decks;
-    cout << "Base Bet: ";
-    cin >> wager;   cin.ignore();
     cout << "Q to quit, R to reset";
     while (true) {
+        cout << endl << "Base Bet: ";
+        cin >> wager;
+        cin.ignore();
+
         const double cards_in_deck = 52.0;
         string hand = "L";
         double cards_left = cards_in_deck * decks;
@@ -53,7 +55,7 @@ int main()
             cout << "\n\nEnter Cards: ";
             getline(cin, hand);
             if (hand == "R" || hand == "r")
-                {cout << "\n\n[RESET]\n\n"; break;}
+                {cout << "\n\n[RESET]\n"; break;}
             if (hand == "Q") return 0; /// program exit
 
             for (unsigned int i = 0; i < hand.length(); i++) {
@@ -85,19 +87,17 @@ int main()
             cards_in_deck * (running_count + 3 * (aces - cards_left / 13))
             / cards_left / 2;
 
-            double conservative = 0.5;
+            double conservative = 3;
 
-            if (wager_count < 1 + conservative) {cout << "Bet minimum.";}
+            if (wager_count - 1 < conservative) {cout << "Bet minimum.";}
             else {
                 printf("Bet %.1f.", (wager_count - conservative) * wager);
-                if ((wager_count*wager*1.15/2)>=wager + conservative)
-                    {printf(" | (2 seats): %.1f", (wager_count - conservative)*wager*1.15/2);
+                if ((wager_count - conservative)*1.15 >= 2) {
+                    printf(" | (2 seats): %.1f", (wager_count - conservative)*wager*1.15/2);
                 }
-                if ((wager_count*wager*1.26/2)>=wager+ conservative) {
-                    printf(" | (4 seats): %.1f", (wager_count - conservative)*wager*1.26/2);}
+                if ((wager_count - conservative)*1.26 >= 4) {
+                    printf(" | (4 seats): %.1f", (wager_count - conservative)*wager*1.26/4);}
             }
-
-
         }
     }
 }
